@@ -5,4 +5,3 @@ In order to launch this app on a device through Xcode, please follow through the
 3) Type in "pod install" then hit Return/Enter
 4) Once it's done, type "open ReceiveSMS.xcworkspace/" then hit Enter/Return
 5) Launch it by your Xcode
-Developer - Trung
