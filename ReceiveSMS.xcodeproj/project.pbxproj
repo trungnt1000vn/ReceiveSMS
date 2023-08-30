@@ -1,0 +1,561 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		826CC6827E67ED7354CFF8EC /* Pods_ReceiveSMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1DCBDC300408BBAB189202D /* Pods_ReceiveSMS.framework */; };
+		8740AC7C2A945768003A87DF /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC7B2A945768003A87DF /* CellData.swift */; };
+		8740AC7E2A945770003A87DF /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC7D2A945770003A87DF /* CellModel.swift */; };
+		8740AC802A945778003A87DF /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC7F2A945778003A87DF /* NumberCell.swift */; };
+		8740AC832A945811003A87DF /* TableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC812A945811003A87DF /* TableCell.swift */; };
+		8740AC842A945811003A87DF /* TableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8740AC822A945811003A87DF /* TableCell.xib */; };
+		8740AC872A945880003A87DF /* SMSCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC852A945880003A87DF /* SMSCell.swift */; };
+		8740AC882A945880003A87DF /* SMSCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8740AC862A945880003A87DF /* SMSCell.xib */; };
+		8740AC8F2A9459E5003A87DF /* NumbersViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC8D2A9459E5003A87DF /* NumbersViewCell.swift */; };
+		8740AC902A9459E5003A87DF /* NumbersViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8740AC8E2A9459E5003A87DF /* NumbersViewCell.xib */; };
+		8740AC922A945BD1003A87DF /* SMSViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC912A945BD1003A87DF /* SMSViewController.swift */; };
+		8740AC942A945BDE003A87DF /* NumbersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC932A945BDE003A87DF /* NumbersViewController.swift */; };
+		8740AC962A945D0A003A87DF /* CountryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC952A945D0A003A87DF /* CountryViewController.swift */; };
+		8740AC992A945F27003A87DF /* SwiftSoup in Frameworks */ = {isa = PBXBuildFile; productRef = 8740AC982A945F27003A87DF /* SwiftSoup */; };
+		8740AC9C2A9477BA003A87DF /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 8740AC9B2A9477BA003A87DF /* Toast */; };
+		87BB9F682A9455CC008653AD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB9F672A9455CC008653AD /* AppDelegate.swift */; };
+		87BB9F6A2A9455CC008653AD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87BB9F692A9455CC008653AD /* SceneDelegate.swift */; };
+		87BB9F6F2A9455CC008653AD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87BB9F6D2A9455CC008653AD /* Main.storyboard */; };
+		87BB9F712A9455CD008653AD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 87BB9F702A9455CD008653AD /* Assets.xcassets */; };
+		87BB9F742A9455CD008653AD /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 87BB9F722A9455CD008653AD /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8608DBA4A80DEC04AE4624D2 /* Pods-ReceiveSMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReceiveSMS.debug.xcconfig"; path = "Target Support Files/Pods-ReceiveSMS/Pods-ReceiveSMS.debug.xcconfig"; sourceTree = "<group>"; };
+		8740AC7B2A945768003A87DF /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
+		8740AC7D2A945770003A87DF /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
+		8740AC7F2A945778003A87DF /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
+		8740AC812A945811003A87DF /* TableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableCell.swift; sourceTree = "<group>"; };
+		8740AC822A945811003A87DF /* TableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableCell.xib; sourceTree = "<group>"; };
+		8740AC852A945880003A87DF /* SMSCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSCell.swift; sourceTree = "<group>"; };
+		8740AC862A945880003A87DF /* SMSCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SMSCell.xib; sourceTree = "<group>"; };
+		8740AC8D2A9459E5003A87DF /* NumbersViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersViewCell.swift; sourceTree = "<group>"; };
+		8740AC8E2A9459E5003A87DF /* NumbersViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumbersViewCell.xib; sourceTree = "<group>"; };
+		8740AC912A945BD1003A87DF /* SMSViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSViewController.swift; sourceTree = "<group>"; };
+		8740AC932A945BDE003A87DF /* NumbersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumbersViewController.swift; sourceTree = "<group>"; };
+		8740AC952A945D0A003A87DF /* CountryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewController.swift; sourceTree = "<group>"; };
+		87BB9F642A9455CC008653AD /* ReceiveSMS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReceiveSMS.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		87BB9F672A9455CC008653AD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		87BB9F692A9455CC008653AD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		87BB9F6E2A9455CC008653AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		87BB9F702A9455CD008653AD /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		87BB9F732A9455CD008653AD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		87BB9F752A9455CD008653AD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8B017F1195162198D57D5A14 /* Pods-ReceiveSMS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReceiveSMS.release.xcconfig"; path = "Target Support Files/Pods-ReceiveSMS/Pods-ReceiveSMS.release.xcconfig"; sourceTree = "<group>"; };
+		D1DCBDC300408BBAB189202D /* Pods_ReceiveSMS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ReceiveSMS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		87BB9F612A9455CC008653AD /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8740AC9C2A9477BA003A87DF /* Toast in Frameworks */,
+				826CC6827E67ED7354CFF8EC /* Pods_ReceiveSMS.framework in Frameworks */,
+				8740AC992A945F27003A87DF /* SwiftSoup in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		12428C9A8CD963A69CC9E8AF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D1DCBDC300408BBAB189202D /* Pods_ReceiveSMS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2EDAA327C906F06CAA46A098 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8608DBA4A80DEC04AE4624D2 /* Pods-ReceiveSMS.debug.xcconfig */,
+				8B017F1195162198D57D5A14 /* Pods-ReceiveSMS.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		8740AC742A94565C003A87DF /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				8740AC952A945D0A003A87DF /* CountryViewController.swift */,
+				8740AC912A945BD1003A87DF /* SMSViewController.swift */,
+				8740AC932A945BDE003A87DF /* NumbersViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		8740AC752A945669003A87DF /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				87BB9F672A9455CC008653AD /* AppDelegate.swift */,
+				87BB9F692A9455CC008653AD /* SceneDelegate.swift */,
+				87BB9F702A9455CD008653AD /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		8740AC762A945672003A87DF /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				87BB9F6D2A9455CC008653AD /* Main.storyboard */,
+				87BB9F722A9455CD008653AD /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		8740AC772A94570F003A87DF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8740AC7B2A945768003A87DF /* CellData.swift */,
+				8740AC7D2A945770003A87DF /* CellModel.swift */,
+				8740AC7F2A945778003A87DF /* NumberCell.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8740AC782A94573B003A87DF /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8740AC812A945811003A87DF /* TableCell.swift */,
+				8740AC822A945811003A87DF /* TableCell.xib */,
+				8740AC852A945880003A87DF /* SMSCell.swift */,
+				8740AC862A945880003A87DF /* SMSCell.xib */,
+				8740AC8D2A9459E5003A87DF /* NumbersViewCell.swift */,
+				8740AC8E2A9459E5003A87DF /* NumbersViewCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		87BB9F5B2A9455CC008653AD = {
+			isa = PBXGroup;
+			children = (
+				87BB9F662A9455CC008653AD /* ReceiveSMS */,
+				87BB9F652A9455CC008653AD /* Products */,
+				2EDAA327C906F06CAA46A098 /* Pods */,
+				12428C9A8CD963A69CC9E8AF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		87BB9F652A9455CC008653AD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				87BB9F642A9455CC008653AD /* ReceiveSMS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		87BB9F662A9455CC008653AD /* ReceiveSMS */ = {
+			isa = PBXGroup;
+			children = (
+				8740AC782A94573B003A87DF /* Cells */,
+				8740AC772A94570F003A87DF /* Models */,
+				8740AC762A945672003A87DF /* Storyboards */,
+				8740AC752A945669003A87DF /* Resources */,
+				8740AC742A94565C003A87DF /* ViewController */,
+				87BB9F752A9455CD008653AD /* Info.plist */,
+			);
+			path = ReceiveSMS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		87BB9F632A9455CC008653AD /* ReceiveSMS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 87BB9F782A9455CD008653AD /* Build configuration list for PBXNativeTarget "ReceiveSMS" */;
+			buildPhases = (
+				0E981B6CBF6674DDD9B55A75 /* [CP] Check Pods Manifest.lock */,
+				87BB9F602A9455CC008653AD /* Sources */,
+				87BB9F612A9455CC008653AD /* Frameworks */,
+				87BB9F622A9455CC008653AD /* Resources */,
+				6ED0DC726716F06398FFE41F /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ReceiveSMS;
+			packageProductDependencies = (
+				8740AC982A945F27003A87DF /* SwiftSoup */,
+				8740AC9B2A9477BA003A87DF /* Toast */,
+			);
+			productName = ReceiveSMS;
+			productReference = 87BB9F642A9455CC008653AD /* ReceiveSMS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		87BB9F5C2A9455CC008653AD /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1430;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					87BB9F632A9455CC008653AD = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 87BB9F5F2A9455CC008653AD /* Build configuration list for PBXProject "ReceiveSMS" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 87BB9F5B2A9455CC008653AD;
+			packageReferences = (
+				8740AC972A945F27003A87DF /* XCRemoteSwiftPackageReference "SwiftSoup" */,
+				8740AC9A2A9477BA003A87DF /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+			);
+			productRefGroup = 87BB9F652A9455CC008653AD /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				87BB9F632A9455CC008653AD /* ReceiveSMS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		87BB9F622A9455CC008653AD /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87BB9F742A9455CD008653AD /* LaunchScreen.storyboard in Resources */,
+				8740AC902A9459E5003A87DF /* NumbersViewCell.xib in Resources */,
+				87BB9F712A9455CD008653AD /* Assets.xcassets in Resources */,
+				8740AC882A945880003A87DF /* SMSCell.xib in Resources */,
+				8740AC842A945811003A87DF /* TableCell.xib in Resources */,
+				87BB9F6F2A9455CC008653AD /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0E981B6CBF6674DDD9B55A75 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ReceiveSMS-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6ED0DC726716F06398FFE41F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReceiveSMS/Pods-ReceiveSMS-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ReceiveSMS/Pods-ReceiveSMS-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ReceiveSMS/Pods-ReceiveSMS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		87BB9F602A9455CC008653AD /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87BB9F682A9455CC008653AD /* AppDelegate.swift in Sources */,
+				8740AC8F2A9459E5003A87DF /* NumbersViewCell.swift in Sources */,
+				8740AC962A945D0A003A87DF /* CountryViewController.swift in Sources */,
+				8740AC802A945778003A87DF /* NumberCell.swift in Sources */,
+				8740AC872A945880003A87DF /* SMSCell.swift in Sources */,
+				8740AC832A945811003A87DF /* TableCell.swift in Sources */,
+				87BB9F6A2A9455CC008653AD /* SceneDelegate.swift in Sources */,
+				8740AC7E2A945770003A87DF /* CellModel.swift in Sources */,
+				8740AC922A945BD1003A87DF /* SMSViewController.swift in Sources */,
+				8740AC7C2A945768003A87DF /* CellData.swift in Sources */,
+				8740AC942A945BDE003A87DF /* NumbersViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		87BB9F6D2A9455CC008653AD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				87BB9F6E2A9455CC008653AD /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		87BB9F722A9455CD008653AD /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				87BB9F732A9455CD008653AD /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		87BB9F762A9455CD008653AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		87BB9F772A9455CD008653AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		87BB9F792A9455CD008653AD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8608DBA4A80DEC04AE4624D2 /* Pods-ReceiveSMS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2FX323KNBX;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReceiveSMS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appchannel.ReceiveSMS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		87BB9F7A2A9455CD008653AD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8B017F1195162198D57D5A14 /* Pods-ReceiveSMS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2FX323KNBX;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ReceiveSMS/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.appchannel.ReceiveSMS;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		87BB9F5F2A9455CC008653AD /* Build configuration list for PBXProject "ReceiveSMS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87BB9F762A9455CD008653AD /* Debug */,
+				87BB9F772A9455CD008653AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		87BB9F782A9455CD008653AD /* Build configuration list for PBXNativeTarget "ReceiveSMS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				87BB9F792A9455CD008653AD /* Debug */,
+				87BB9F7A2A9455CD008653AD /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8740AC972A945F27003A87DF /* XCRemoteSwiftPackageReference "SwiftSoup" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scinfu/SwiftSoup";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
+		8740AC9A2A9477BA003A87DF /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8740AC982A945F27003A87DF /* SwiftSoup */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8740AC972A945F27003A87DF /* XCRemoteSwiftPackageReference "SwiftSoup" */;
+			productName = SwiftSoup;
+		};
+		8740AC9B2A9477BA003A87DF /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8740AC9A2A9477BA003A87DF /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = 87BB9F5C2A9455CC008653AD /* Project object */;
+}
