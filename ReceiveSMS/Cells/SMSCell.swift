@@ -21,6 +21,8 @@ class SMSCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        copyButton.imageView?.contentMode = .scaleAspectFit
+        selectionStyle = .none
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

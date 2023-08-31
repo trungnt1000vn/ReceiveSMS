@@ -20,6 +20,7 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var copyButton: UIButton!
+    @IBOutlet weak var settingButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         textFiled.layer.borderWidth = 0.3
@@ -92,6 +93,13 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
         }
     }
     
+    @IBAction func settingTapped(_ sender: Any) {
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "settingviewcontroller") as? SettingViewController {
+            vc.navigationItem.largeTitleDisplayMode = .never
+            vc.title = "Setting"
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     @IBAction func copyTapped(_ sender: Any) {
         let content = numberLabel.text
         let pasteBoard = UIPasteboard.general

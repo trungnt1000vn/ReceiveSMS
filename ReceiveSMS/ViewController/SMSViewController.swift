@@ -15,6 +15,10 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBOutlet weak var smstableView: UITableView!
     @IBOutlet weak var copyButton: UIButton!
     @IBOutlet weak var reloadButton: UIButton!
+    @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var numberLabel: UILabel!
+    
+    
     var cellDataArray : [CellModel] = []
     var number:String = ""
     
@@ -22,10 +26,19 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
         super.viewDidLoad()
         smstableView.delegate = self
         smstableView.dataSource = self
+        smstableView.separatorStyle = .none
+        textField.layer.borderWidth = 0.5
+        textField.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
+        textField.layer.cornerRadius = 25
+        numberLabel.text = number
         let backButtonImage = UIImage(named: "backarrow")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
-        backButton.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10) 
+        backButton.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        let settingButtonImage = UIImage(named: "settingiconMain")?.withRenderingMode(.alwaysOriginal)
+        let settingButton = UIBarButtonItem(image: settingButtonImage, style: .plain, target: self, action: #selector(settingButtonTapped))
+        navigationItem.rightBarButtonItem = settingButton
+        settingButton.imageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         let nib = UINib(nibName: "SMSCell", bundle: nil)
         smstableView.register(nib, forCellReuseIdentifier: SMSCell.identifier)
         DispatchQueue.main.async {
@@ -97,6 +110,13 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
+    @objc func settingButtonTapped(){
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "settingviewcontroller") as? SettingViewController {
+            vc.navigationItem.largeTitleDisplayMode = .never
+            vc.title = "Setting"
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     private func showToast(message :String){
         self.view.makeToast(message, duration: 2.0, position: .bottom)
     }
@@ -113,7 +133,7 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 180
+        return 185
     }
     func showLoadingHUD(){
         progressHUD = JGProgressHUD(style: .dark)

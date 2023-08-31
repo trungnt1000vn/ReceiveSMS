@@ -40,6 +40,10 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
         let backButtonImage = UIImage(named: "backarrow")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
+        let settingButtonImage = UIImage(named: "settingiconMain")?.withRenderingMode(.alwaysOriginal)
+        let settingButton = UIBarButtonItem(image: settingButtonImage, style: .plain, target: self, action: #selector(settingButtonTapped))
+        navigationItem.rightBarButtonItem = settingButton
+        settingButton.imageInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         backButton.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         let nib = UINib(nibName: "NumbersViewCell", bundle: nil)
         numbertableView.register(nib, forCellReuseIdentifier: NumbersViewCell.identifier)
@@ -70,7 +74,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
                         for countryElement in countryElements {
                             let countryText = try countryElement.text()
                             if countryText == self.country {
-
+                                
                                 if let phoneNumber = try countryElement.parent()?.select("div.number-boxes-itemm-number").first()?.text() {
                                     self.phoneNumberData.append(phoneNumber)
                                 }
@@ -101,11 +105,11 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
                         let html = String(data: data, encoding: .utf8)
                         let doc = try SwiftSoup.parse(html ?? "")
                         
-
+                        
                         let trElements = try doc.select("tr")
                         
                         if let firstTr = trElements.first() {
-
+                            
                             let tdElements = try firstTr.select("td.wr3pc32233el1878")
                             if tdElements.size() >= 3 {
                                 let thirdTd = try tdElements.get(2)
@@ -126,7 +130,13 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
-    
+    @objc func settingButtonTapped(){
+        if let vc = storyboard?.instantiateViewController(withIdentifier: "settingviewcontroller") as? SettingViewController {
+            vc.navigationItem.largeTitleDisplayMode = .never
+            vc.title = "Setting"
+            navigationController?.pushViewController(vc, animated: true)
+        }
+    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return phoneNumberCount
     }
@@ -150,7 +160,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
             let cellData = phoneNumberData[indexPath.row]
             let number = String(cellData.dropFirst())
             vc.number = number
-            vc.title = number
+            vc.title = "Phone number"
             navigationController?.pushViewController(vc, animated: true)
         }
     }

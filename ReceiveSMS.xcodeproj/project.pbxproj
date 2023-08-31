@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		826CC6827E67ED7354CFF8EC /* Pods_ReceiveSMS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D1DCBDC300408BBAB189202D /* Pods_ReceiveSMS.framework */; };
+		872E86662AA08DA90097BF31 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872E86652AA08DA90097BF31 /* SettingViewController.swift */; };
+		872E86692AA0923C0097BF31 /* SettingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 872E86672AA0923C0097BF31 /* SettingTableViewCell.swift */; };
+		872E866A2AA0923C0097BF31 /* SettingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 872E86682AA0923C0097BF31 /* SettingTableViewCell.xib */; };
 		8740AC7C2A945768003A87DF /* CellData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC7B2A945768003A87DF /* CellData.swift */; };
 		8740AC7E2A945770003A87DF /* CellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC7D2A945770003A87DF /* CellModel.swift */; };
 		8740AC802A945778003A87DF /* NumberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8740AC7F2A945778003A87DF /* NumberCell.swift */; };
@@ -31,6 +34,9 @@
 
 /* Begin PBXFileReference section */
 		8608DBA4A80DEC04AE4624D2 /* Pods-ReceiveSMS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReceiveSMS.debug.xcconfig"; path = "Target Support Files/Pods-ReceiveSMS/Pods-ReceiveSMS.debug.xcconfig"; sourceTree = "<group>"; };
+		872E86652AA08DA90097BF31 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
+		872E86672AA0923C0097BF31 /* SettingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingTableViewCell.swift; sourceTree = "<group>"; };
+		872E86682AA0923C0097BF31 /* SettingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingTableViewCell.xib; sourceTree = "<group>"; };
 		8740AC7B2A945768003A87DF /* CellData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellData.swift; sourceTree = "<group>"; };
 		8740AC7D2A945770003A87DF /* CellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellModel.swift; sourceTree = "<group>"; };
 		8740AC7F2A945778003A87DF /* NumberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberCell.swift; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 				8740AC952A945D0A003A87DF /* CountryViewController.swift */,
 				8740AC912A945BD1003A87DF /* SMSViewController.swift */,
 				8740AC932A945BDE003A87DF /* NumbersViewController.swift */,
+				872E86652AA08DA90097BF31 /* SettingViewController.swift */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -133,6 +140,8 @@
 				8740AC862A945880003A87DF /* SMSCell.xib */,
 				8740AC8D2A9459E5003A87DF /* NumbersViewCell.swift */,
 				8740AC8E2A9459E5003A87DF /* NumbersViewCell.xib */,
+				872E86672AA0923C0097BF31 /* SettingTableViewCell.swift */,
+				872E86682AA0923C0097BF31 /* SettingTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -241,6 +250,7 @@
 				87BB9F712A9455CD008653AD /* Assets.xcassets in Resources */,
 				8740AC882A945880003A87DF /* SMSCell.xib in Resources */,
 				8740AC842A945811003A87DF /* TableCell.xib in Resources */,
+				872E866A2AA0923C0097BF31 /* SettingTableViewCell.xib in Resources */,
 				87BB9F6F2A9455CC008653AD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -302,9 +312,11 @@
 				8740AC832A945811003A87DF /* TableCell.swift in Sources */,
 				87BB9F6A2A9455CC008653AD /* SceneDelegate.swift in Sources */,
 				8740AC7E2A945770003A87DF /* CellModel.swift in Sources */,
+				872E86692AA0923C0097BF31 /* SettingTableViewCell.swift in Sources */,
 				8740AC922A945BD1003A87DF /* SMSViewController.swift in Sources */,
 				8740AC7C2A945768003A87DF /* CellData.swift in Sources */,
 				8740AC942A945BDE003A87DF /* NumbersViewController.swift in Sources */,
+				872E86662AA08DA90097BF31 /* SettingViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
