@@ -258,9 +258,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJu-K6-hiA">
-                                <rect key="frame" x="60" y="94" width="270" height="70"/>
+                                <rect key="frame" x="60" y="109" width="270" height="70"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="33"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -320,6 +320,7 @@
                         <viewLayoutGuide key="safeArea" id="Vq7-uF-wYv"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
+                    <navigationItem key="navigationItem" id="0pd-VY-U9x"/>
                     <connections>
                         <outlet property="advantagesLabel" destination="Tt7-6f-06I" id="Nlb-13-E1P"/>
                         <outlet property="backgroundImage" destination="UzS-rC-TzX" id="tDQ-bJ-f8G"/>
@@ -330,7 +331,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qx8-lJ-L5t" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="7084.6153846153848" y="-41.232227488151658"/>
+            <point key="canvasLocation" x="8013.8461538461534" y="-41.232227488151658"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="W2x-Y2-fTp">
@@ -358,6 +359,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="P49-JF-IXn">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -376,6 +383,12 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LCl-G5-YcN">
                         <rect key="frame" x="0.0" y="47" width="390" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -385,6 +398,30 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GJE-5L-PHH" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4260" y="-41.232227488151658"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="8hF-9L-hyI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rCn-Hq-bcj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Esp-nV-G8M">
+                        <rect key="frame" x="0.0" y="47" width="390" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                        <textAttributes key="largeTitleTextAttributes">
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="U2R-G4-gXU" kind="relationship" relationship="rootViewController" id="lKO-rV-t6Y"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="b71-4M-NMZ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="7084.6153846153848" y="-41.232227488151658"/>
         </scene>
     </scenes>
     <resources>

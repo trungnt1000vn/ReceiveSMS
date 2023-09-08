@@ -295,7 +295,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
             let cellData = phoneNumberData[indexPath.row]
             let number = String(cellData.dropFirst())
             vc.number = number
-            vc.title = "Phone number"
+            vc.title = "Phone Number"
             navigationController?.pushViewController(vc, animated: true)
         }
     }

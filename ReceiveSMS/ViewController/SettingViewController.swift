@@ -7,6 +7,7 @@
 
 import UIKit
 import Toast
+import StoreKit
 
 class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
@@ -44,8 +45,27 @@ class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         settingTableView.deselectRow(at: indexPath, animated:  true)
-        showToast(message: "Coming soon...")
+        let selectedItem = settingitem[indexPath.row]
+        if (selectedItem == "Feedback") {
+            showToast(message: "Coming soon...")
+        }
+        else if (selectedItem == "Rate us"){
+            showAppStoreRating()
+        }
+        else if (selectedItem == "Share this app"){
+            let link = "https://github.com/trungnt1000vn/ReceiveSMS"
+            
+
+            let items = [URL(string: link)!]
+            
+
+            let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            
+            present(activityViewController, animated: true, completion: nil)
+        }
+        
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 74
     }
@@ -66,5 +86,13 @@ extension SettingViewController {
     }
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+    func showAppStoreRating() {
+        if #available(iOS 14.0, *) {
+            SKStoreReviewController.requestReview()
+        } else {
+            // Handle older iOS versions where SKStoreReviewController is not available.
+            // You can navigate the user to the App Store page using a regular link or prompt them to rate the app in a different way.
+        }
     }
 }
