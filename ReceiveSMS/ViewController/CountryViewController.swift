@@ -8,6 +8,8 @@
 import UIKit
 import SwiftSoup
 import Toast
+import SDWebImage
+
 class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     var cellDataArray: [CellData] = []
     var originalCellDataArray: [CellData] = []
@@ -21,8 +23,10 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var copyButton: UIButton!
     @IBOutlet weak var settingButton: UIButton!
+    @IBOutlet weak var goproButn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.overrideUserInterfaceStyle = .light
         textFiled.layer.borderWidth = 0.3
         textFiled.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
         textFiled.layer.cornerRadius = 20
@@ -93,6 +97,11 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
         }
     }
     
+    
+    @IBAction func goProTapped(_ sender: Any) {
+        showToast(message: "Coming soon...")
+    }
+    
     @IBAction func settingTapped(_ sender: Any) {
         if let vc = storyboard?.instantiateViewController(withIdentifier: "settingviewcontroller") as? SettingViewController {
             vc.navigationItem.largeTitleDisplayMode = .never
@@ -138,7 +147,22 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
         let cell = tableView.dequeueReusableCell(withIdentifier: TableCell.identifier, for: indexPath) as! TableCell
         let cellData = cellDataArray[indexPath.row]
         cell.countryLabel.text = cellData.countryName
-        cell.iconImage.image = UIImage(named: cellData.countryName.lowercased())
+        /// Import offline
+        //cell.iconImage.image = UIImage(named: cellData.countryName.lowercased())
+        
+        let countryUse = cellData.countryName.lowercased()
+        let filename = "\(countryUse).png"
+        let path = "countriesphotos/\(filename)"
+        DispatchQueue.global().async {
+            StorageManager.shared.downloadURL(for: path, completion: { result in
+                switch result {
+                case .success(let url):
+                    cell.iconImage.sd_setImage(with: url, completed: nil)
+                case .failure(let error):
+                    print("Failed to download the image : \(error)")
+                }
+            })
+        }
         return cell
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

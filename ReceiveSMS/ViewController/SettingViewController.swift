@@ -7,6 +7,7 @@
 
 import UIKit
 import Toast
+
 class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var backgroundImage: UIImageView!
@@ -19,6 +20,7 @@ class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.overrideUserInterfaceStyle = .light
         settingTableView.dataSource = self
         settingTableView.delegate = self
         settingTableView.separatorStyle = .none

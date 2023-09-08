@@ -101,6 +101,15 @@
                                     <action selector="settingTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SMQ-Xp-VPc"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PLC-Lm-8Bs">
+                                <rect key="frame" x="217" y="82" width="112" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="goprobtn"/>
+                                <connections>
+                                    <action selector="goProTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yR1-jv-P0j"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -110,6 +119,7 @@
                         <outlet property="BG1" destination="xVa-q7-Dyd" id="Dhe-QS-RTX"/>
                         <outlet property="copyButton" destination="g70-vY-wAX" id="kpt-4N-3sL"/>
                         <outlet property="countryLabel" destination="aDD-n9-WMq" id="OEY-sl-8py"/>
+                        <outlet property="goproButn" destination="PLC-Lm-8Bs" id="FKn-Vz-9I2"/>
                         <outlet property="imageView" destination="ebk-cc-k2U" id="sSG-Gr-74P"/>
                         <outlet property="numberLabel" destination="3ca-hn-dWl" id="A1u-wZ-egY"/>
                         <outlet property="searchBar" destination="a3c-Qa-v0u" id="iMf-i6-JcM"/>
@@ -168,6 +178,12 @@
                                 <rect key="frame" x="33" y="177" width="63" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KZh-9s-9X3">
+                                <rect key="frame" x="231" y="50" width="112" height="38"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="goprobtn"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="UQA-LJ-RF9"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -179,6 +195,7 @@
                         <outlet property="countryIcon" destination="MlQ-7M-VOe" id="NOk-r6-6Sb"/>
                         <outlet property="countryLabel" destination="yNC-ep-pRe" id="Ojb-rF-8Js"/>
                         <outlet property="coverImage" destination="niK-0A-V6Z" id="Hzu-zQ-BIV"/>
+                        <outlet property="goProBtn" destination="KZh-9s-9X3" id="KOB-hh-d2D"/>
                         <outlet property="numbertableView" destination="oDr-3p-OOK" id="Ww2-Xr-pGC"/>
                         <outlet property="textField" destination="xEi-0g-QTd" id="225-lU-jch"/>
                     </connections>
@@ -376,6 +393,7 @@
         <image name="BGSetting" width="327" height="124"/>
         <image name="btnCopyNumber" width="217" height="40"/>
         <image name="copyButton" width="84" height="30"/>
+        <image name="goprobtn" width="88" height="24"/>
         <image name="linePremium" width="37" height="3"/>
         <image name="linerecent" width="573" height="3"/>
         <image name="reloadicon" width="36" height="36"/>
