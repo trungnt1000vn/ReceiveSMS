@@ -31,6 +31,8 @@ class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDa
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
         navigationItem.leftBarButtonItem = backButton
         backButton.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(_:)))
+        self.view.addGestureRecognizer(panGesture)
         
     }
     
@@ -93,6 +95,104 @@ extension SettingViewController {
         } else {
             // Handle older iOS versions where SKStoreReviewController is not available.
             // You can navigate the user to the App Store page using a regular link or prompt them to rate the app in a different way.
+        }
+    }
+    @objc func panGestureHandler(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        
+        switch gesture.state {
+        case .began:
+            // Bắt đầu chuyển động
+            break
+        case .changed:
+            // Xử lý chuyển động
+            let progress = translation.x / view.bounds.width
+            updateInteractiveTransition(progress)
+        case .ended, .cancelled:
+            // Kết thúc chuyển động
+            let velocity = gesture.velocity(in: view)
+            let progress = translation.x / view.bounds.width
+            if velocity.x > 0 {
+                if let navigationController = navigationController {
+                    if progress > 0.5 || velocity.x > 1000 {
+                        finishInteractiveTransition()
+                    } else {
+                        cancelInteractiveTransition()
+                    }
+                }
+            } else {
+                cancelInteractiveTransition()
+            }
+        default:
+            break
+        }
+    }
+    private func updateInteractiveTransition(_ percentComplete: CGFloat) {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        let targetView = navigationController.view!
+        let fromView = navigationController.viewControllers[navigationController.viewControllers.count - 2].view!
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: targetView.bounds.height)
+        let fromViewEndFrame = CGRect(x: -screenWidth * percentComplete, y: 0, width: screenWidth, height: fromView.bounds.height)
+        
+        targetView.frame = targetViewEndFrame
+        fromView.frame = fromViewEndFrame
+    }
+
+    private func finishInteractiveTransition() {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        let fromViewEndFrame = CGRect(x: screenWidth, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            navigationController.view.frame = targetViewEndFrame
+            navigationController.viewControllers[navigationController.viewControllers.count - 2].view.frame = fromViewEndFrame
+        }) { (_) in
+            navigationController.popViewController(animated: false)
+            navigationController.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        }
+    }
+
+    private func cancelInteractiveTransition() {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        let fromViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            navigationController.view.frame = targetViewEndFrame
+            navigationController.viewControllers[navigationController.viewControllers.count - 2].view.frame = fromViewEndFrame
+        }) { (_) in
+            navigationController.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        }
+    }
+
+    private func animateTransition(from fromView: UIView, to toView: UIView) {
+        let screenWidth = UIScreen.main.bounds.width
+        
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: fromView.bounds.height))
+        containerView.addSubview(toView)
+        containerView.addSubview(fromView)
+        
+        toView.frame = CGRect(x: screenWidth, y: 0, width: screenWidth, height: fromView.bounds.height)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            fromView.frame = CGRect(x: -screenWidth, y: 0, width: screenWidth, height: fromView.bounds.height)
+            toView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: fromView.bounds.height)
+        }) { (_) in
+            fromView.removeFromSuperview()
+            containerView.removeFromSuperview()
         }
     }
 }

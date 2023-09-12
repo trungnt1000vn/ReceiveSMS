@@ -44,6 +44,10 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
         tableView.register(nib, forCellReuseIdentifier: TableCell.identifier)
         fetchData()
     }
+    override func viewWillAppear(_ animated: Bool) {
+            super.viewWillAppear(animated)
+            setUpRecent()
+    }
     func fetchData(){
         let urlString = "https://receive-smss.com/"
         if let url = URL(string: urlString) {
@@ -138,8 +142,12 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
             vc.country = countryName
             UserDefaults.standard.setValue(countryName, forKey: "countryRecent")
             UserDefaults.standard.setValue("No number yet", forKey: "numberRecent")
-            navigationController?.pushViewController(vc, animated: true)
+            DispatchQueue.main.async {
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            
         }
+        
     }
     
     

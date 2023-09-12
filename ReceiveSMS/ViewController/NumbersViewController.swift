@@ -19,7 +19,6 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var countryLabel: UILabel!
     @IBOutlet weak var countingLabel: UILabel!
     @IBOutlet weak var countryIcon: UIImageView!
-    @IBOutlet weak var goProBtn: UIButton!
     
     
     var progressHUD: JGProgressHUD?
@@ -27,6 +26,13 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var phoneNumberData: [String] = []
     var timeData: [String] = []
     var phoneNumberCount: Int = 0
+    
+    static func makeSelf() -> NumbersViewController {
+               let storyboard: UIStoryboard = UIStoryboard(name: "Numbers View Controller", bundle: nil)
+               let url_filesViewController = storyboard.instantiateViewController(withIdentifier: "NumbersViewController") as! NumbersViewController
+
+               return url_filesViewController
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,9 +72,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-    @IBAction func goProTapped(_ sender: Any) {
-        
-    }
+
     
     
     @objc func panGestureHandler(_ gesture: UIPanGestureRecognizer) {
@@ -307,5 +311,8 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func hideLoadingHUD() {
         progressHUD?.dismiss()
         progressHUD = nil
+    }
+    func showToast(message: String){
+        self.view.makeToast(message, duration: 2.0, position: .bottom)
     }
 }

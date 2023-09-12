@@ -18,7 +18,7 @@ class SettingTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         iconImage.contentMode = .scaleAspectFit
-        selectionStyle = .none
+        selectionStyle = .default
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
