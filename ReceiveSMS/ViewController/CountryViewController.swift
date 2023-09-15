@@ -45,8 +45,8 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
         fetchData()
     }
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            setUpRecent()
+        super.viewWillAppear(animated)
+        setUpRecent()
     }
     func fetchData(){
         let urlString = "https://receive-smss.com/"
@@ -60,7 +60,7 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
                 if let html = String(data: data, encoding: .utf8) {
                     do {
                         let doc = try SwiftSoup.parse(html)
-                         
+                        
                         let countryElements = try doc.select("div.number-boxes-item-country")
                         
                         for countryElement in countryElements {
@@ -135,19 +135,27 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        if let vc = storyboard?.instantiateViewController(withIdentifier: "NumbersViewController") as? NumbersViewController {
-            vc.navigationItem.largeTitleDisplayMode = .never
-            let cellData = cellDataArray[indexPath.row]
-            let countryName = cellData.countryName
-            vc.country = countryName
-            UserDefaults.standard.setValue(countryName, forKey: "countryRecent")
-            UserDefaults.standard.setValue("No number yet", forKey: "numberRecent")
-            DispatchQueue.main.async {
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-            
-        }
+                if let vc = storyboard?.instantiateViewController(withIdentifier: "NumbersViewController") as? NumbersViewController {
+                    vc.navigationItem.largeTitleDisplayMode = .never
+                    let cellData = cellDataArray[indexPath.row]
+                    let countryName = cellData.countryName
+                    vc.country = countryName
+                    UserDefaults.standard.setValue(countryName, forKey: "countryRecent")
+                    UserDefaults.standard.setValue("No number yet", forKey: "numberRecent")
+                    DispatchQueue.main.async {
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }
         
+                }
+//        let vc = ReceiveSMS.NumbersViewController.makeSelf()
+//        let cellData = cellDataArray[indexPath.row]
+//        let countryName = cellData.countryName
+//        vc.country = countryName
+//        UserDefaults.standard.setValue(countryName, forKey: "countryRecent")
+//        UserDefaults.standard.setValue("No number yet", forKey: "numberRecent")
+//        DispatchQueue.main.async {
+//            self.navigationController?.pushViewController(vc, animated: true)
+//        }
     }
     
     

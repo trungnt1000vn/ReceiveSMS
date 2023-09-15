@@ -28,9 +28,8 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var phoneNumberCount: Int = 0
     
     static func makeSelf() -> NumbersViewController {
-               let storyboard: UIStoryboard = UIStoryboard(name: "Numbers View Controller", bundle: nil)
+               let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
                let url_filesViewController = storyboard.instantiateViewController(withIdentifier: "NumbersViewController") as! NumbersViewController
-
                return url_filesViewController
     }
     
@@ -49,8 +48,8 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
         bgOpacity.contentMode = .scaleAspectFill
         //coverImage.image = UIImage(named: "\(country.lowercased()) cover")
         
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(_:)))
-        self.view.addGestureRecognizer(panGesture)
+        //let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(_:)))
+        //self.view.addGestureRecognizer(panGesture)
         
         let backButtonImage = UIImage(named: "backarrow")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
@@ -74,106 +73,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     
 
     
-    
-    @objc func panGestureHandler(_ gesture: UIPanGestureRecognizer) {
-        let translation = gesture.translation(in: view)
-        
-        switch gesture.state {
-        case .began:
-            // Bắt đầu chuyển động
-            break
-        case .changed:
-            // Xử lý chuyển động
-            let progress = translation.x / view.bounds.width
-            updateInteractiveTransition(progress)
-        case .ended, .cancelled:
-            // Kết thúc chuyển động
-            let velocity = gesture.velocity(in: view)
-            let progress = translation.x / view.bounds.width
-            if velocity.x > 0 {
-                if let navigationController = navigationController {
-                    if progress > 0.5 || velocity.x > 1000 {
-                        finishInteractiveTransition()
-                    } else {
-                        cancelInteractiveTransition()
-                    }
-                }
-            } else {
-                cancelInteractiveTransition()
-            }
-        default:
-            break
-        }
-    }
-
-    private func updateInteractiveTransition(_ percentComplete: CGFloat) {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
-        let targetView = navigationController.view!
-        let fromView = navigationController.viewControllers[navigationController.viewControllers.count - 2].view!
-        
-        let screenWidth = UIScreen.main.bounds.width
-        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: targetView.bounds.height)
-        let fromViewEndFrame = CGRect(x: -screenWidth * percentComplete, y: 0, width: screenWidth, height: fromView.bounds.height)
-        
-        targetView.frame = targetViewEndFrame
-        fromView.frame = fromViewEndFrame
-    }
-
-    private func finishInteractiveTransition() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
-        let screenWidth = UIScreen.main.bounds.width
-        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
-        let fromViewEndFrame = CGRect(x: screenWidth, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            navigationController.view.frame = targetViewEndFrame
-            navigationController.viewControllers[navigationController.viewControllers.count - 2].view.frame = fromViewEndFrame
-        }) { (_) in
-            navigationController.popViewController(animated: false)
-            navigationController.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
-        }
-    }
-
-    private func cancelInteractiveTransition() {
-        guard let navigationController = navigationController else {
-            return
-        }
-        
-        let screenWidth = UIScreen.main.bounds.width
-        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
-        let fromViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            navigationController.view.frame = targetViewEndFrame
-            navigationController.viewControllers[navigationController.viewControllers.count - 2].view.frame = fromViewEndFrame
-        }) { (_) in
-            navigationController.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
-        }
-    }
-
-    private func animateTransition(from fromView: UIView, to toView: UIView) {
-        let screenWidth = UIScreen.main.bounds.width
-        
-        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: fromView.bounds.height))
-        containerView.addSubview(toView)
-        containerView.addSubview(fromView)
-        
-        toView.frame = CGRect(x: screenWidth, y: 0, width: screenWidth, height: fromView.bounds.height)
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            fromView.frame = CGRect(x: -screenWidth, y: 0, width: screenWidth, height: fromView.bounds.height)
-            toView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: fromView.bounds.height)
-        }) { (_) in
-            fromView.removeFromSuperview()
-            containerView.removeFromSuperview()
-        }
-    }
+   
     func fetchDataForCountry() {
         let urlString = "https://receive-smss.com/"
         if let url = URL(string: urlString) {
@@ -286,7 +186,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.iconImage.image = UIImage(named: "phoneicon")
         cell.rightArrow.image = UIImage(named: "nextbutton")
         let number = phoneNumberData[indexPath.row]
-        cell.timeLabel.text = fetchTime(number: number)
+        //cell.timeLabel.text = fetchTime(number: number)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

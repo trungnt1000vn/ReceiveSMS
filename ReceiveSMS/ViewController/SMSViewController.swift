@@ -85,7 +85,7 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
             break
         }
     }
-
+    
     private func updateInteractiveTransition(_ percentComplete: CGFloat) {
         guard let navigationController = navigationController else {
             return
@@ -101,7 +101,7 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
         targetView.frame = targetViewEndFrame
         fromView.frame = fromViewEndFrame
     }
-
+    
     private func finishInteractiveTransition() {
         guard let navigationController = navigationController else {
             return
@@ -119,7 +119,7 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
             navigationController.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
         }
     }
-
+    
     private func cancelInteractiveTransition() {
         guard let navigationController = navigationController else {
             return
@@ -136,7 +136,7 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
             navigationController.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
         }
     }
-
+    
     private func animateTransition(from fromView: UIView, to toView: UIView) {
         let screenWidth = UIScreen.main.bounds.width
         
@@ -155,39 +155,44 @@ class SMSViewController:UIViewController, UITableViewDelegate, UITableViewDataSo
         }
     }
     
-    func fetchDataForNumber(){
+    func fetchDataForNumber() {
         let urlString = "https://receive-smss.com/sms/\(number)/"
         if let url = URL(string: urlString) {
             let task = URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                guard let self = self else { return }
                 
                 if let data = data {
                     do {
                         let html = String(data: data, encoding: .utf8)
                         let doc = try SwiftSoup.parse(html ?? "")
                         
-                        let trElements = try doc.select("tr")
+                        let messageDetails = try doc.select("div.row.message_details")
+                        var newDataArray: [CellModel] = []
                         
-                        for trElement in trElements {
-                            let tdElements = try trElement.select("td.wr3pc32233el1878")
+                        for messageDetail in messageDetails {
+                            let senderElement = try messageDetail.select("div.col-md-3.sender").first()
+                            let contentElement = try messageDetail.select("div.col-md-6.msg").first()
+                            let timeElement = try messageDetail.select("div.col-md-3.time").first()
                             
-                            if tdElements.size() >= 3 {
-                                let sender = try tdElements.get(0).text()
-                                let content = try tdElements.get(1).text()
-                                let time = try tdElements.get(2).text()
-                                
-                                let cellData = CellModel(sender: sender, content: content, time: time)
-                                
-                                DispatchQueue.main.async {
-                                    self?.cellDataArray.append(cellData)
-                                    self?.smstableView.reloadData()
-                                }
-                            }
+                            let sender = try senderElement?.text() ?? ""
+                            let content = try contentElement?.text() ?? ""
+                            let time = try timeElement?.text() ?? ""
+                            
+                            let cellData = CellModel(sender: sender, content: content, time: time)
+                            newDataArray.append(cellData)
+                        }
+                        
+                        DispatchQueue.main.async {
+                            self.cellDataArray = newDataArray
+                            self.smstableView.reloadData()
+                            self.hideLoadingHUD()
                         }
                     } catch {
                         print("Error parsing HTML: \(error)")
                     }
                 }
             }
+            
             task.resume()
         }
     }
