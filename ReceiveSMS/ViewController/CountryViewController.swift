@@ -9,10 +9,13 @@ import UIKit
 import SwiftSoup
 import Toast
 import SDWebImage
+import GoogleMobileAds
 
-class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate, GADFullScreenContentDelegate, GADBannerViewDelegate {
     var cellDataArray: [CellData] = []
     var originalCellDataArray: [CellData] = []
+    private var interstitial: GADInterstitialAd?
+    var bannerView: GADBannerView!
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var BG1: UIImageView!
@@ -26,6 +29,9 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
     @IBOutlet weak var goproButn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadAd()
+        loadAdBanner()
+        searchBar.showsCancelButton = true
         self.view.overrideUserInterfaceStyle = .light
         textFiled.layer.borderWidth = 0.3
         textFiled.layer.borderColor = CGColor(red: 1, green: 1, blue: 1, alpha: 1)
@@ -43,11 +49,54 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
         setUpRecent()
         tableView.register(nib, forCellReuseIdentifier: TableCell.identifier)
         fetchData()
+   
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         setUpRecent()
     }
+    
+    func loadAd() {
+           let request = GADRequest()
+           GADInterstitialAd.load(
+               withAdUnitID: "ca-app-pub-3940256099942544/4411468910",
+               request: request,
+               completionHandler: { [self] ad, error in
+                   if let error = error {
+                       print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                       return
+                   }
+                   interstitial = ad
+                   interstitial?.fullScreenContentDelegate = self
+               }
+           )
+       }
+
+       func showAd() {
+           if let interstitial = interstitial {
+               let root = UIApplication.shared.keyWindow!.rootViewController
+               interstitial.present(fromRootViewController: root!)
+           }
+       }
+
+       // Được gọi khi quảng cáo đã hoàn thành
+       func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+           print("Ad did dismiss full screen content.")
+           loadAd() // Tải quảng cáo mới để chuẩn bị cho lần sau
+       }
+
+       // Được gọi khi quảng cáo không thể hiển thị
+       func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+           print("Ad did fail to present full screen content.")
+           self.presentNextViewController() // Chuyển sang màn hình tiếp theo nếu quảng cáo không thể hiển thị
+       }
+
+       // Hàm để chuyển sang màn hình tiếp theo
+       func presentNextViewController() {
+           let nextViewController = CountryViewController() // Thay bằng màn hình tiếp theo của bạn
+           self.navigationController?.pushViewController(nextViewController, animated: true)
+       }
+    
     func fetchData(){
         let urlString = "https://receive-smss.com/"
         if let url = URL(string: urlString) {
@@ -83,6 +132,63 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
             }
             task.resume()
         }
+    }
+    
+    func loadAdBanner(){
+        let adSize = GADAdSizeFromCGSize(CGSize(width: view.frame.width, height: 55))
+        bannerView = GADBannerView(adSize: adSize)
+        bannerView.delegate = self
+        addBannerViewToView(bannerView)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.backgroundColor = UIColor.clear
+        
+        bannerView.layer.borderWidth = 2.0
+        bannerView.layer.borderColor = UIColor.clear.cgColor
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: view.safeAreaLayoutGuide,
+                                attribute: .bottom,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+    }
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("bannerViewDidReceiveAd")
+    }
+    
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+    
+    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+        print("bannerViewDidRecordImpression")
+    }
+    
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+        print("bannerViewWillPresentScreen")
+    }
+    
+    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+        print("bannerViewWillDIsmissScreen")
+    }
+    
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+        print("bannerViewDidDismissScreen")
     }
     
     @objc func backButtonTapped() {
@@ -121,6 +227,7 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+    
         if searchText.isEmpty {
             cellDataArray = originalCellDataArray
             tableView.reloadData()
@@ -132,6 +239,12 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
     }
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
+    }
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.text = nil
+        searchBar.resignFirstResponder()
+        fetchData()
+        tableView.reloadData()
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
@@ -145,7 +258,7 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
                     DispatchQueue.main.async {
                         self.navigationController?.pushViewController(vc, animated: true)
                     }
-        
+                    showAd()
                 }
 //        let vc = ReceiveSMS.NumbersViewController.makeSelf()
 //        let cellData = cellDataArray[indexPath.row]

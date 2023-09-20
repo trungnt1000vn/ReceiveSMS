@@ -9,8 +9,9 @@ import UIKit
 import SwiftSoup
 import JGProgressHUD
 import SDWebImage
+import GoogleMobileAds
 
-class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource{
+class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, GADBannerViewDelegate{
     
     @IBOutlet weak var numbertableView: UITableView!
     @IBOutlet weak var coverImage: UIImageView!
@@ -20,7 +21,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var countingLabel: UILabel!
     @IBOutlet weak var countryIcon: UIImageView!
     
-    
+    var bannerView: GADBannerView!
     var progressHUD: JGProgressHUD?
     var country: String = ""
     var phoneNumberData: [String] = []
@@ -28,9 +29,9 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     var phoneNumberCount: Int = 0
     
     static func makeSelf() -> NumbersViewController {
-               let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-               let url_filesViewController = storyboard.instantiateViewController(withIdentifier: "NumbersViewController") as! NumbersViewController
-               return url_filesViewController
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let url_filesViewController = storyboard.instantiateViewController(withIdentifier: "NumbersViewController") as! NumbersViewController
+        return url_filesViewController
     }
     
     override func viewDidLoad() {
@@ -48,8 +49,8 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
         bgOpacity.contentMode = .scaleAspectFill
         //coverImage.image = UIImage(named: "\(country.lowercased()) cover")
         
-        //let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(_:)))
-        //self.view.addGestureRecognizer(panGesture)
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(_:)))
+        self.view.addGestureRecognizer(panGesture)
         
         let backButtonImage = UIImage(named: "backarrow")?.withRenderingMode(.alwaysOriginal)
         let backButton = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(backButtonTapped))
@@ -68,12 +69,164 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
         DispatchQueue.main.async {
             self.hideLoadingHUD()
         }
-        
+        loadAd()
     }
     
-
+    func loadAd(){
+        let adSize = GADAdSizeFromCGSize(CGSize(width: view.frame.width, height: 55))
+        bannerView = GADBannerView(adSize: adSize)
+        bannerView.delegate = self
+        addBannerViewToView(bannerView)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.backgroundColor = UIColor.clear
+        
+        bannerView.layer.borderWidth = 2.0
+        bannerView.layer.borderColor = UIColor.clear.cgColor
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: view.safeAreaLayoutGuide,
+                                attribute: .bottom,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+    }
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("bannerViewDidReceiveAd")
+    }
     
-   
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+    
+    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+        print("bannerViewDidRecordImpression")
+    }
+    
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+        print("bannerViewWillPresentScreen")
+    }
+    
+    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+        print("bannerViewWillDIsmissScreen")
+    }
+    
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+        print("bannerViewDidDismissScreen")
+    }
+    @objc func panGestureHandler(_ gesture: UIPanGestureRecognizer) {
+        let translation = gesture.translation(in: view)
+        
+        switch gesture.state {
+        case .began:
+            // Bắt đầu chuyển động
+            break
+        case .changed:
+            // Xử lý chuyển động
+            let progress = translation.x / view.bounds.width
+            updateInteractiveTransition(progress)
+        case .ended, .cancelled:
+            // Kết thúc chuyển động
+            let velocity = gesture.velocity(in: view)
+            let progress = translation.x / view.bounds.width
+            if velocity.x > 0 {
+                if let navigationController = navigationController {
+                    if progress > 0.5 || velocity.x > 1000 {
+                        finishInteractiveTransition()
+                    } else {
+                        cancelInteractiveTransition()
+                    }
+                }
+            } else {
+                cancelInteractiveTransition()
+            }
+        default:
+            break
+        }
+    }
+    private func updateInteractiveTransition(_ percentComplete: CGFloat) {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        let targetView = navigationController.view!
+        let fromView = navigationController.viewControllers[navigationController.viewControllers.count - 2].view!
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: targetView.bounds.height)
+        let fromViewEndFrame = CGRect(x: -screenWidth * percentComplete, y: 0, width: screenWidth, height: fromView.bounds.height)
+        
+        targetView.frame = targetViewEndFrame
+        fromView.frame = fromViewEndFrame
+    }
+    
+    private func finishInteractiveTransition() {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        let fromViewEndFrame = CGRect(x: screenWidth, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            navigationController.view.frame = targetViewEndFrame
+            navigationController.viewControllers[navigationController.viewControllers.count - 2].view.frame = fromViewEndFrame
+        }) { (_) in
+            navigationController.popViewController(animated: false)
+            navigationController.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        }
+    }
+    
+    private func cancelInteractiveTransition() {
+        guard let navigationController = navigationController else {
+            return
+        }
+        
+        let screenWidth = UIScreen.main.bounds.width
+        let targetViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        let fromViewEndFrame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            navigationController.view.frame = targetViewEndFrame
+            navigationController.viewControllers[navigationController.viewControllers.count - 2].view.frame = fromViewEndFrame
+        }) { (_) in
+            navigationController.view.frame = CGRect(x: 0, y: 0, width: screenWidth, height: navigationController.view.bounds.height)
+        }
+    }
+    
+    private func animateTransition(from fromView: UIView, to toView: UIView) {
+        let screenWidth = UIScreen.main.bounds.width
+        
+        let containerView = UIView(frame: CGRect(x: 0, y: 0, width: screenWidth, height: fromView.bounds.height))
+        containerView.addSubview(toView)
+        containerView.addSubview(fromView)
+        
+        toView.frame = CGRect(x: screenWidth, y: 0, width: screenWidth, height: fromView.bounds.height)
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            fromView.frame = CGRect(x: -screenWidth, y: 0, width: screenWidth, height: fromView.bounds.height)
+            toView.frame = CGRect(x: 0, y: 0, width: screenWidth, height: fromView.bounds.height)
+        }) { (_) in
+            fromView.removeFromSuperview()
+            containerView.removeFromSuperview()
+        }
+    }
+    
     func fetchDataForCountry() {
         let urlString = "https://receive-smss.com/"
         if let url = URL(string: urlString) {
@@ -134,38 +287,38 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
             task.resume()
         }
     }
-    func fetchTime(number: String) -> String{
-        var time: String = ""
-        let urlString = "https://receive-smss.com/sms/\(number)"
-        if let url = URL(string: urlString) {
-            let task = URLSession.shared.dataTask(with: url) { data, response, error in
-                if let data = data {
-                    do {
-                        let html = String(data: data, encoding: .utf8)
-                        let doc = try SwiftSoup.parse(html ?? "")
-                        
-                        
-                        let trElements = try doc.select("tr")
-                        
-                        if let firstTr = trElements.first() {
-                            
-                            let tdElements = try firstTr.select("td.wr3pc32233el1878")
-                            if tdElements.size() >= 3 {
-                                let thirdTd = try tdElements.get(2)
-                                let content = try thirdTd.text()
-                                print("Content of third td: \(content)")
-                                time = content
-                            }
-                        }
-                    } catch {
-                        print("Error parsing HTML: \(error)")
-                    }
-                }
-            }
-            task.resume()
-        }
-        return time
-    }
+//    func fetchTime(number: String) -> String{
+//        var time: String = ""
+//        let urlString = "https://receive-smss.com/sms/\(number)"
+//        if let url = URL(string: urlString) {
+//            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+//                if let data = data {
+//                    do {
+//                        let html = String(data: data, encoding: .utf8)
+//                        let doc = try SwiftSoup.parse(html ?? "")
+//                        
+//                        
+//                        let trElements = try doc.select("tr")
+//                        
+//                        if let firstTr = trElements.first() {
+//                            
+//                            let tdElements = try firstTr.select("td.wr3pc32233el1878")
+//                            if tdElements.size() >= 3 {
+//                                let thirdTd = try tdElements.get(2)
+//                                let content = try thirdTd.text()
+//                                print("Content of third td: \(content)")
+//                                time = content
+//                            }
+//                        }
+//                    } catch {
+//                        print("Error parsing HTML: \(error)")
+//                    }
+//                }
+//            }
+//            task.resume()
+//        }
+//        return time
+//    }
     @objc func backButtonTapped() {
         navigationController?.popViewController(animated: true)
     }
@@ -186,7 +339,6 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.iconImage.image = UIImage(named: "phoneicon")
         cell.rightArrow.image = UIImage(named: "nextbutton")
         let number = phoneNumberData[indexPath.row]
-        //cell.timeLabel.text = fetchTime(number: number)
         return cell
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

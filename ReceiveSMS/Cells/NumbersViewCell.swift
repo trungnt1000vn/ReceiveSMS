@@ -12,7 +12,6 @@ class NumbersViewCell: UITableViewCell {
     @IBOutlet weak var iconImage: UIImageView!
     @IBOutlet weak var numberLabel: UILabel!
     @IBOutlet weak var rightArrow: UIImageView!
-    @IBOutlet weak var timeLabel: UILabel!
     static let identifier = "NumbersViewCell"
     override func awakeFromNib() {
         super.awakeFromNib()
