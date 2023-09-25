@@ -22,6 +22,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var countryIcon: UIImageView!
     
     var bannerView: GADBannerView!
+    var interstitial: GADInterstitialAd?
     var progressHUD: JGProgressHUD?
     var country: String = ""
     var phoneNumberData: [String] = []
@@ -70,6 +71,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.hideLoadingHUD()
         }
         loadAd()
+        loadAdFull()
     }
     
     func loadAd(){
@@ -328,6 +330,7 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
             vc.title = "Setting"
             navigationController?.pushViewController(vc, animated: true)
         }
+        showAd()
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return phoneNumberCount
@@ -367,4 +370,48 @@ class NumbersViewController: UIViewController, UITableViewDelegate, UITableViewD
     func showToast(message: String){
         self.view.makeToast(message, duration: 2.0, position: .bottom)
     }
+}
+extension NumbersViewController : GADFullScreenContentDelegate {
+    
+    func loadAdFull() {
+           let request = GADRequest()
+           GADInterstitialAd.load(
+               withAdUnitID: "ca-app-pub-3940256099942544/4411468910",
+               request: request,
+               completionHandler: { [self] ad, error in
+                   if let error = error {
+                       print("Failed to load interstitial ad with error: \(error.localizedDescription)")
+                       return
+                   }
+                   interstitial = ad
+                   interstitial?.fullScreenContentDelegate = self
+               }
+           )
+       }
+
+       func showAd() {
+           if let interstitial = interstitial {
+               let root = UIApplication.shared.keyWindow!.rootViewController
+               interstitial.present(fromRootViewController: root!)
+           }
+       }
+
+       // Được gọi khi quảng cáo đã hoàn thành
+       func adDidDismissFullScreenContent(_ ad: GADFullScreenPresentingAd) {
+           print("Ad did dismiss full screen content.")
+           loadAd() // Tải quảng cáo mới để chuẩn bị cho lần sau
+       }
+
+       // Được gọi khi quảng cáo không thể hiển thị
+       func ad(_ ad: GADFullScreenPresentingAd, didFailToPresentFullScreenContentWithError error: Error) {
+           print("Ad did fail to present full screen content.")
+           self.presentNextViewController() // Chuyển sang màn hình tiếp theo nếu quảng cáo không thể hiển thị
+       }
+
+       // Hàm để chuyển sang màn hình tiếp theo
+       func presentNextViewController() {
+           let nextViewController = CountryViewController() // Thay bằng màn hình tiếp theo của bạn
+           self.navigationController?.pushViewController(nextViewController, animated: true)
+       }
+    
 }

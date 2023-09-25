@@ -8,8 +8,9 @@
 import UIKit
 import Toast
 import StoreKit
+import GoogleMobileAds
 
-class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDataSource {
+class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDataSource, GADBannerViewDelegate {
     
     @IBOutlet weak var backgroundImage: UIImageView!
     @IBOutlet weak var premiumLabel: UILabel!
@@ -18,6 +19,7 @@ class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDa
     @IBOutlet weak var settingTableView: UITableView!
     
     var settingitem :[String] = ["Feedback", "Rate us", "Share this app"]
+    var bannerView: GADBannerView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,9 +35,64 @@ class SettingViewController: UIViewController,UITableViewDelegate, UITableViewDa
         backButton.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 10)
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(panGestureHandler(_:)))
         self.view.addGestureRecognizer(panGesture)
+        loadAd()
+    }
+    func loadAd(){
+        let adSize = GADAdSizeFromCGSize(CGSize(width: view.frame.width, height: 55))
+        bannerView = GADBannerView(adSize: adSize)
+        bannerView.delegate = self
+        addBannerViewToView(bannerView)
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.backgroundColor = UIColor.clear
         
+        bannerView.layer.borderWidth = 2.0
+        bannerView.layer.borderColor = UIColor.clear.cgColor
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+    }
+    func addBannerViewToView(_ bannerView: GADBannerView) {
+        bannerView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(bannerView)
+        view.addConstraints(
+            [NSLayoutConstraint(item: bannerView,
+                                attribute: .bottom,
+                                relatedBy: .equal,
+                                toItem: view.safeAreaLayoutGuide,
+                                attribute: .bottom,
+                                multiplier: 1,
+                                constant: 0),
+             NSLayoutConstraint(item: bannerView,
+                                attribute: .centerX,
+                                relatedBy: .equal,
+                                toItem: view,
+                                attribute: .centerX,
+                                multiplier: 1,
+                                constant: 0)
+            ])
+    }
+    func bannerViewDidReceiveAd(_ bannerView: GADBannerView) {
+        print("bannerViewDidReceiveAd")
     }
     
+    func bannerView(_ bannerView: GADBannerView, didFailToReceiveAdWithError error: Error) {
+        print("bannerView:didFailToReceiveAdWithError: \(error.localizedDescription)")
+    }
+    
+    func bannerViewDidRecordImpression(_ bannerView: GADBannerView) {
+        print("bannerViewDidRecordImpression")
+    }
+    
+    func bannerViewWillPresentScreen(_ bannerView: GADBannerView) {
+        print("bannerViewWillPresentScreen")
+    }
+    
+    func bannerViewWillDismissScreen(_ bannerView: GADBannerView) {
+        print("bannerViewWillDIsmissScreen")
+    }
+    
+    func bannerViewDidDismissScreen(_ bannerView: GADBannerView) {
+        print("bannerViewDidDismissScreen")
+    }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = settingTableView.dequeueReusableCell(withIdentifier: SettingTableViewCell.identifier, for: indexPath) as! SettingTableViewCell
         cell.label.text = settingitem[indexPath.row]

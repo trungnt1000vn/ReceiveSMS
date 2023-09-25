@@ -218,6 +218,7 @@ class CountryViewController: UIViewController,UITableViewDelegate, UITableViewDa
             vc.title = "Setting"
             navigationController?.pushViewController(vc, animated: true)
         }
+        showAd()
     }
     @IBAction func copyTapped(_ sender: Any) {
         let content = numberLabel.text
